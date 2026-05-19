@@ -1,0 +1,23 @@
+[
+  { "name": "Hobbiton", "mile": 0.0 },
+  { "name": "Bywater", "mile": 1.2 },
+  { "name": "Green Hill Country", "mile": 5.8 },
+  { "name": "Tookland", "mile": 11.0 },
+  { "name": "Buckland Gate", "mile": 22.0 },
+  { "name": "Brandywine Bridge", "mile": 24.0 },
+  { "name": "Crickhollow", "mile": 27.0 },
+  { "name": "Old Forest Edge", "mile": 30.0 },
+  { "name": "Withywindle", "mile": 34.0 },
+  { "name": "Tom Bombadil’s House", "mile": 40.0 },
+  { "name": "Barrow-downs", "mile": 55.0 },
+  { "name": "East Road", "mile": 70.0 },
+  { "name": "Bree", "mile": 75.0 },
+  { "name": "Midgewater Marshes", "mile": 95.0 },
+  { "name": "Weather Hills", "mile": 110.0 },
+  { "name": "Weathertop", "mile": 120.0 },
+  { "name": "Road to the Trollshaws", "mile": 150.0 },
+  { "name": "Last Bridge", "mile": 165.0 },
+  { "name": "Trollshaws", "mile": 190.0 },
+  { "name": "Ford of Bruinen", "mile": 215.0 },
+  { "name": "Rivendell", "mile": 458.0 }
+]
