@@ -1,5 +1,8 @@
 name: Middle-earth Journey
 
+permissions:
+  contents: write
+
 on:
   push:
     paths:
