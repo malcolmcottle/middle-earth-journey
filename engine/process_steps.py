@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 # Load route
 with open("engine/route.json", "r") as f:
@@ -72,4 +72,13 @@ You are currently at:
 
 ### **{current_point['name']}**
 
-{current_point.get('description', '')
+{current_point.get('description', '')}
+
+Your journey continues toward Rivendell…
+"""
+
+with open("docs/journal.md", "w") as f:
+    f.write(journal_text)
+
+print("Map saved to docs/map.png")
+print("Journal saved to docs/journal.md")
