@@ -27,7 +27,7 @@ jobs:
         run: |
           python engine/process_steps.py
 
-            - name: Commit updated journey
+      - name: Commit updated journey
         run: |
           git config user.name "Middle-earth Journey Bot"
           git config user.email "actions@github.com"
