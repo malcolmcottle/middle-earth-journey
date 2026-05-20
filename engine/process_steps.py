@@ -1,23 +1,75 @@
-[
-  { "name": "Hobbiton", "mile": 0.0 },
-  { "name": "Bywater", "mile": 1.2 },
-  { "name": "Green Hill Country", "mile": 5.8 },
-  { "name": "Tookland", "mile": 11.0 },
-  { "name": "Buckland Gate", "mile": 22.0 },
-  { "name": "Brandywine Bridge", "mile": 24.0 },
-  { "name": "Crickhollow", "mile": 27.0 },
-  { "name": "Old Forest Edge", "mile": 30.0 },
-  { "name": "Withywindle", "mile": 34.0 },
-  { "name": "Tom Bombadil’s House", "mile": 40.0 },
-  { "name": "Barrow-downs", "mile": 55.0 },
-  { "name": "East Road", "mile": 70.0 },
-  { "name": "Bree", "mile": 75.0 },
-  { "name": "Midgewater Marshes", "mile": 95.0 },
-  { "name": "Weather Hills", "mile": 110.0 },
-  { "name": "Weathertop", "mile": 120.0 },
-  { "name": "Road to the Trollshaws", "mile": 150.0 },
-  { "name": "Last Bridge", "mile": 165.0 },
-  { "name": "Trollshaws", "mile": 190.0 },
-  { "name": "Ford of Bruinen", "mile": 215.0 },
-  { "name": "Rivendell", "mile": 458.0 }
-]
+import json
+from datetime import datetime
+from PIL import Image, ImageDraw, ImageFont
+
+# Load route
+with open("engine/route.json", "r") as f:
+    route = json.load(f)
+
+# Load steps
+with open("steps.json", "r") as f:
+    steps_data = json.load(f)
+
+# Convert steps to miles
+# (Average stride length ~ 0.762m → 0.000473 miles per step)
+MILES_PER_STEP = 0.000473
+
+total_steps = sum(entry["steps"] for entry in steps_data)
+total_miles = total_steps * MILES_PER_STEP
+
+# Find current position on route
+distance_remaining = total_miles
+current_point = route[0]
+
+for point in route:
+    if distance_remaining >= point["distance_from_start"]:
+        current_point = point
+    else:
+        break
+
+# -----------------------------
+# Generate MAP IMAGE
+# -----------------------------
+
+# Create a simple map placeholder (800x400)
+img = Image.new("RGB", (800, 400), color=(240, 235, 220))
+draw = ImageDraw.Draw(img)
+
+# Title
+draw.text((20, 20), "Middle-earth Journey", fill="black")
+
+# Draw progress bar
+bar_x = 20
+bar_y = 80
+bar_width = 760
+bar_height = 40
+
+progress = min(total_miles / route[-1]["distance_from_start"], 1.0)
+progress_width = int(bar_width * progress)
+
+draw.rectangle([bar_x, bar_y, bar_x + bar_width, bar_y + bar_height], outline="black")
+draw.rectangle([bar_x, bar_y, bar_x + progress_width, bar_y + bar_height], fill="green")
+
+# Label
+draw.text((20, 140), f"Total steps: {total_steps}", fill="black")
+draw.text((20, 170), f"Distance: {total_miles:.2f} miles", fill="black")
+draw.text((20, 200), f"Current location: {current_point['name']}", fill="black")
+
+# Save map
+img.save("docs/map.png")
+
+# -----------------------------
+# Generate JOURNAL
+# -----------------------------
+
+journal_text = f"""# Middle-earth Journey Journal
+
+**Date:** {datetime.now().strftime('%Y-%m-%d')}
+
+You have walked **{total_steps} steps**, covering **{total_miles:.2f} miles**.
+
+You are currently at:
+
+### **{current_point['name']}**
+
+{current_point.get('description', '')
