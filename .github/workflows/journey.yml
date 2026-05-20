@@ -6,7 +6,7 @@ on:
       - "steps.json"
 
 jobs:
-  update-journey:
+  updateJourney:
     runs-on: ubuntu-latest
 
     steps:
