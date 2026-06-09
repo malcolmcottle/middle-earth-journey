@@ -1,6 +1,6 @@
 # Middle-earth Journey
 
-**Total steps:** 15000
-**Distance travelled:** 7.09 miles
-**Current location:** Bywater
-**Next milestone:** Green Hill Country (1.42 miles to go)
+**Total steps:** 0
+**Distance travelled:** 0.00 miles
+**Current location:** Hobbiton
+**Next milestone:** Bywater (4.73 miles to go)
