@@ -1,13 +1,6 @@
-# Middle-earth Journey Journal
+# Middle-earth Journey
 
-**Date:** 2026-05-20
-
-You have walked **10000 steps**, covering **4.73 miles**.
-
-You are currently at:
-
-### **Bywater**
-
-
-
-Your journey continues toward Rivendell…
+**Total steps:** 10100
+**Distance travelled:** 4.78 miles
+**Current location:** Bywater
+**Next milestone:** Green Hill Country (1.02 miles to go)
