@@ -1,6 +1,6 @@
 # Middle-earth Journey
 
-**Total steps:** 18000
-**Distance travelled:** 8.51 miles
-**Current location:** Green Hill Country
-**Next milestone:** Tookland (2.49 miles to go)
+**Total steps:** 10000
+**Distance travelled:** 4.73 miles
+**Current location:** Bywater
+**Next milestone:** Green Hill Country (3.78 miles to go)
