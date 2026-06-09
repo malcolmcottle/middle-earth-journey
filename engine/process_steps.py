@@ -32,31 +32,36 @@ for point in route:
 # -----------------------------
 
 # Create a simple map placeholder (800x400)
-img = Image.new("RGB", (800, 400), color=(240, 235, 220))
-draw = ImageDraw.Draw(img)
+from PIL import Image, ImageDraw
+
+# Load and prepare base map
+base_map = Image.open("docs/base_map.png").convert("RGB")
+base_map = base_map.resize((800, 400))
+
+draw = ImageDraw.Draw(base_map)
 
 # Title
-draw.text((20, 20), "Middle-earth Journey", fill="black")
+draw.text((10, 20), "Middle-earth Journey", fill="black")
 
 # Draw progress bar
-bar_x = 20
-bar_y = 80
-bar_width = 760
-bar_height = 40
+bar_left = 10
+bar_top = 330
+bar_width = 780
+bar_height = 30
 
-progress = min(total_miles / route[-1]["distance_from_start"], 1.0)
-progress_width = int(bar_width * progress)
+progress = miles_done / total_miles
+progress_width = bar_width * progress
 
-draw.rectangle([bar_x, bar_y, bar_x + bar_width, bar_y + bar_height], outline="black")
-draw.rectangle([bar_x, bar_y, bar_x + progress_width, bar_y + bar_height], fill="green")
+draw.rectangle([bar_left, bar_top, bar_left + bar_width, bar_top + bar_height], outline="black")
+draw.rectangle([bar_left, bar_top, bar_left + progress_width, bar_top + bar_height], fill="green")
 
-# Label
-draw.text((20, 140), f"Total steps: {total_steps}", fill="black")
-draw.text((20, 170), f"Distance: {total_miles:.2f} miles", fill="black")
-draw.text((20, 200), f"Current location: {current_point['name']}", fill="black")
+# Labels
+draw.text((10, 280), f"Total steps: {total_steps}", fill="black")
+draw.text((10, 300), f"Distance: {total_miles:.2f} miles", fill="black")
+draw.text((10, 320), f"Current location: {current_point['name']}", fill="black")
 
 # Save map
-img.save("docs/map.png")
+base_map.save("docs/map.png")
 
 # -----------------------------
 # Generate JOURNAL
