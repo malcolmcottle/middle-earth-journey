@@ -1,6 +1,6 @@
 # Middle-earth Journey
 
-**Total steps:** 10
-**Distance travelled:** 0.00 miles
+**Total steps:** 100
+**Distance travelled:** 0.05 miles
 **Current location:** Hobbiton
-**Next milestone:** Bywater (4.73 miles to go)
+**Next milestone:** Bywater (4.68 miles to go)
