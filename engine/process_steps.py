@@ -57,15 +57,15 @@ with open("docs/journal.md", "w") as f:
 # -----------------------------
 
 location_coords = {
-    "Hobbiton": (118, 214),
-    "Bywater": (132, 216),
-    "Green Hill Country": (150, 222),
-    "Tookland": (168, 230),
-    "Bree": (260, 215),
-    "Midgewater Marshes": (305, 210),
-    "Weathertop": (335, 205),
-    "Last Bridge": (385, 198),
-    "Rivendell": (430, 190),
+    "Hobbiton": (118, 185),
+    "Bywater": (132, 190),
+    "Green Hill Country": (145, 200),
+    "Tookland": (165, 215),
+    "Bree": (260, 200),
+    "Midgewater Marshes": (305, 195),
+    "Weathertop": (335, 190),
+    "Last Bridge": (385, 185),
+    "Rivendell": (430, 180),
 }
 
 marker_x, marker_y = location_coords.get(current_point["name"], (400, 200))
