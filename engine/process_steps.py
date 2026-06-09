@@ -1,3 +1,4 @@
+print("USING NEW COORDINATES")
 import json
 from PIL import Image, ImageDraw
 
