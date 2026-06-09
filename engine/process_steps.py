@@ -54,61 +54,40 @@ with open("docs/journal.md", "w") as f:
 
 # -----------------------------
 # Map coordinates per location
-# (for your 800x400 resized map)
 # -----------------------------
 
 location_coords = {
-    "Hobbiton": (120, 220),
-    "Bywater": (135, 222),
-    "Green Hill Country": (155, 228),
-    "Tookland": (170, 235),
-    "Bree": (260, 220),
-    "Midgewater Marshes": (305, 212),
-    "Weathertop": (335, 208),
-    "Last Bridge": (385, 202),
-    "Rivendell": (430, 195),
+    "Hobbiton": (118, 214),
+    "Bywater": (132, 216),
+    "Green Hill Country": (150, 222),
+    "Tookland": (168, 230),
+    "Bree": (260, 215),
+    "Midgewater Marshes": (305, 210),
+    "Weathertop": (335, 205),
+    "Last Bridge": (385, 198),
+    "Rivendell": (430, 190),
 }
 
-# Fallback if a name isn't in the dict
 marker_x, marker_y = location_coords.get(current_point["name"], (400, 200))
 
 # -----------------------------
-# Generate map image
+# Build combined canvas
 # -----------------------------
 
-base_map = Image.open("docs/base_map.png").convert("RGB")
-base_map = base_map.resize((800, 400))
+# Load and resize map
+map_img = Image.open("docs/base_map.png").convert("RGB")
+map_img = map_img.resize((800, 400))
 
-draw = ImageDraw.Draw(base_map)
+# Create final canvas (map + stats area)
+final_img = Image.new("RGB", (800, 540), (255, 255, 255))
+final_img.paste(map_img, (0, 0))
 
-# Title
-draw.text((10, 20), "Middle-earth Journey", fill="black")
+draw = ImageDraw.Draw(final_img)
 
-# Progress bar
-bar_left = 10
-bar_top = 330
-bar_width = 780
-bar_height = 30
+# -----------------------------
+# Draw marker on map
+# -----------------------------
 
-progress = miles_done / total_miles if total_miles > 0 else 0
-progress = max(0, min(1, progress))  # clamp 0–1
-progress_width = bar_width * progress
-
-draw.rectangle(
-    [bar_left, bar_top, bar_left + bar_width, bar_top + bar_height],
-    outline="black"
-)
-draw.rectangle(
-    [bar_left, bar_top, bar_left + progress_width, bar_top + bar_height],
-    fill="green"
-)
-
-# Labels
-draw.text((10, 280), f"Total steps: {total_steps}", fill="black")
-draw.text((10, 300), f"Distance: {miles_done:.2f} miles", fill="black")
-draw.text((10, 320), f"Current location: {current_point['name']}", fill="black")
-
-# Current location marker (red dot)
 r = 6
 draw.ellipse(
     (marker_x - r, marker_y - r, marker_x + r, marker_y + r),
@@ -116,10 +95,35 @@ draw.ellipse(
     outline="black"
 )
 
-# Optional: label next to marker
-draw.text((marker_x + 8, marker_y - 10), current_point["name"], fill="black")
+draw.text((marker_x + 10, marker_y - 10), current_point["name"], fill="black")
 
-# Save final map
-base_map.save("docs/map.png")
+# -----------------------------
+# Stats + progress bar area
+# -----------------------------
+
+stats_top = 410
+
+draw.text((10, stats_top), f"Total steps: {total_steps}", fill="black")
+draw.text((10, stats_top + 20), f"Distance: {miles_done:.2f} miles", fill="black")
+draw.text((10, stats_top + 40), f"Current location: {current_point['name']}", fill="black")
+
+# Progress bar
+bar_left = 10
+bar_top = stats_top + 70
+bar_width = 780
+bar_height = 30
+
+progress = miles_done / total_miles
+progress = max(0, min(1, progress))
+progress_width = bar_width * progress
+
+draw.rectangle([bar_left, bar_top, bar_left + bar_width, bar_top + bar_height], outline="black")
+draw.rectangle([bar_left, bar_top, bar_left + progress_width, bar_top + bar_height], fill="green")
+
+# -----------------------------
+# Save final image
+# -----------------------------
+
+final_img.save("docs/map.png")
 
 print("Map and journal updated successfully.")
